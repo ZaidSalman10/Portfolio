@@ -4,35 +4,36 @@ import Image from "next/image";
 import { Linkedin, Twitter, Mail, MessageCircle } from "lucide-react";
 import { useState, useRef } from "react";
 import kamran from "../resources/kamran.jpeg"
+import khubaib from "../resources/khubaib.jpeg"
 
 const teamMembers = [
   {
     name: "Kamran Sattar",
-    role: "Founder & CEO",
+    role: "Full-Stack Developer & CEO",
     image: kamran,
     bio: "Visionary leader with passion and enthusiasm in digital innovation",
     color: "#1B263B",
     social: {
-      linkedin: "https://linkedin.com/in/kamransattar",
+      linkedin: "https://linkedin.com/in/m-kamran-sattar-885176345",
       email: "kamran@azkkan.com",
-      whatsapp: "https://wa.me/923198653881" // WhatsApp number format: country code + number (no + or spaces)
+      whatsapp: "https://wa.me/923198653881" 
     }
   },
   {
     name: "Khubaib Asif",
-    role: "Creative Director",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&auto=format&fit=crop&q=60",
+    role: "Analyst and Consultant",
+    image: khubaib,
     bio: "Award-winning designer crafting memorable experiences",
     color: "#415A77",
     social: {
-      linkedin: "https://linkedin.com/in/khubaibasif",
-      email: "khubaib@azkkan.com",
-      whatsapp: "https://wa.me/923001234567"
+      linkedin: "https://linkedin.com/in/khubaib-asif",
+      email: "muhammadkhubaibasif44@gmail.com",
+      whatsapp: "https://wa.me/923312544331"
     }
   },
   {
     name: "Ahsan Subhani",
-    role: "Lead Architect",
+    role: "Media Director",
     image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=800&auto=format&fit=crop&q=60",
     bio: "Systems architect building scalable solutions",
     color: "#778DA9",
@@ -44,7 +45,7 @@ const teamMembers = [
   },
   {
     name: "Numair Jahazi",
-    role: "Frontend Lead",
+    role: "Backend Lead",
     image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&auto=format&fit=crop&q=60",
     bio: "Performance-obsessed frontend wizard",
     color: "#0D1B2A",
@@ -56,19 +57,19 @@ const teamMembers = [
   },
   {
     name: "Zaid Salman",
-    role: "Backend Lead",
+    role: "Frontend Lead",
     image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800&auto=format&fit=crop&q=60",
     bio: "Infrastructure expert ensuring rock-solid backends",
     color: "#1B263B",
     social: {
-      linkedin: "https://linkedin.com/in/zaidsalman",
-      email: "zaid@azkkan.com",
-      whatsapp: "https://wa.me/923001234570"
+      linkedin: "https://linkedin.com/in/zaid-salman-655349327",
+      email: "m.zaidslmaan@gmail.com",
+      whatsapp: "https://wa.me/923258296465"
     }
   },
   {
     name: "Ali Amjad",
-    role: "UX Strategy",
+    role: "UI/UX Designer & QA Tester",
     image: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=800&auto=format&fit=crop&q=60",
     bio: "User advocate translating needs into intuitive designs",
     color: "#415A77",
