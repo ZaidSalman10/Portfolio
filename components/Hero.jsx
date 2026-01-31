@@ -158,7 +158,7 @@ export default function Hero() {
               style={{ y: yText }}
               className="relative inline-block will-change-transform"
             >
-              Digital
+              Virtual
             </motion.h1>
           </div>
 
@@ -186,7 +186,6 @@ export default function Hero() {
               className="relative inline-block"
             >
               Architects
-              <span className="text-slate">.</span>
             </motion.h1>
           </div>
         </div>
