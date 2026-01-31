@@ -54,8 +54,8 @@ const teamMembers = [
     bio: "Full-Stack Web Developer specialized in efficient and bug-free backend coding",
     color: "#0D1B2A",
     social: {
-      linkedin: "https://linkedin.com/in/#",
-      email: "#",
+      linkedin: "https://linkedin.com/in/muhammad-numair-4b92a7389",
+      email: "mnumair42101@gmail.com",
       whatsapp: "https://wa.me/923209055630"
     }
   },
@@ -79,7 +79,7 @@ const teamMembers = [
     color: "#415A77",
     social: {
       linkedin: "https://linkedin.com/in/muhammad-ali-amjad-a0a757331",
-      email: "#",
+      email: "m.94muhammadali@gmail.com",
       whatsapp: "https://wa.me/923281373153"
     }
   },

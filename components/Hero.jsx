@@ -11,7 +11,6 @@ const ScrollIndicator = memo(() => (
     className="absolute bottom-10 right-6 md:right-24 flex flex-col items-center gap-4 z-20 cursor-pointer group"
     onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
   >
-    
 
     <div className="relative w-[1px] h-24 bg-navy overflow-hidden">
       <motion.div 
