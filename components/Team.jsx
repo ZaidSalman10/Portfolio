@@ -5,7 +5,7 @@ import { Linkedin, Twitter, Mail, MessageCircle } from "lucide-react";
 import { useState, useRef } from "react";
 import kamran from "../resources/kamran.jpeg"
 import khubaib from "../resources/khubaib.jpeg"
-import zaid from "../resources/zaid.jpeg"
+import zaid from "../resources/zaid2.jpeg"
 
 const teamMembers = [
   {
