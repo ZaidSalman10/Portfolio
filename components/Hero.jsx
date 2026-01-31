@@ -149,7 +149,7 @@ export default function Hero() {
         <div className="font-heading font-bold text-ghost text-6xl md:text-9xl leading-[0.9] tracking-tighter">
           
           {/* Line 1: DIGITAL */}
-          <div>
+          <div className="overflow-hidden">
             <motion.h1
               variants={textAnimationVariants}
               initial="initial"
