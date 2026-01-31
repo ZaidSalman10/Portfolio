@@ -5,14 +5,17 @@ import { Linkedin, Twitter, Mail, MessageCircle } from "lucide-react";
 import { useState, useRef } from "react";
 import kamran from "../resources/kamran.jpeg"
 import khubaib from "../resources/khubaib.jpeg"
-import zaid from "../resources/zaid2.jpeg"
+import zaid from "../resources/zaid.jpeg"
+import ahsan from "../resources/ahsan.jpeg"
+import numair from "../resources/numair.jpeg"
+import ali from "../resources/ali.jpeg"
 
 const teamMembers = [
   {
     name: "Kamran Sattar",
-    role: "Full-Stack Developer & CEO",
+    role: "DevOps Engineer & CEO",
     image: kamran,
-    bio: "Visionary leader with passion and enthusiasm in digital innovation",
+    bio: "Visionary leader with passion and enthusiasm in digital innovation, deploys your website with security and precision",
     color: "#1B263B",
     social: {
       linkedin: "https://linkedin.com/in/m-kamran-sattar-885176345",
@@ -22,9 +25,9 @@ const teamMembers = [
   },
   {
     name: "Khubaib Asif",
-    role: "Analyst and Consultant",
+    role: "Data Analyst and Consultant",
     image: khubaib,
-    bio: "Award-winning designer crafting memorable experiences",
+    bio: "Deep Analysis of current trends and supports clients to find their actual needs",
     color: "#415A77",
     social: {
       linkedin: "https://linkedin.com/in/khubaib-asif",
@@ -35,32 +38,32 @@ const teamMembers = [
   {
     name: "Ahsan Subhani",
     role: "Media Director",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=800&auto=format&fit=crop&q=60",
-    bio: "Systems architect building scalable solutions",
+    image: ahsan,
+    bio: "Focal Person: Expert in Digital Marketing, PR, Advertising and Media Managing",
     color: "#778DA9",
     social: {
-      linkedin: "https://linkedin.com/in/ahsansubhani",
-      email: "ahsan@azkkan.com",
-      whatsapp: "https://wa.me/923001234568"
+      linkedin: "https://linkedin.com/in/#",
+      email: "#",
+      whatsapp: "https://wa.me/923184297785"
     }
   },
   {
     name: "Numair Jahazi",
     role: "Backend Lead",
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&auto=format&fit=crop&q=60",
-    bio: "Performance-obsessed frontend wizard",
+    image: numair,
+    bio: "Full-Stack Web Developer specialized in efficient and bug-free backend coding",
     color: "#0D1B2A",
     social: {
-      linkedin: "https://linkedin.com/in/numairjahazi",
-      email: "numair@azkkan.com",
-      whatsapp: "https://wa.me/923001234569"
+      linkedin: "https://linkedin.com/in/#",
+      email: "#",
+      whatsapp: "https://wa.me/923209055630"
     }
   },
   {
     name: "Zaid Salman",
     role: "Frontend Lead",
     image: zaid,
-    bio: "Infrastructure expert ensuring rock-solid backends",
+    bio: "Full-Stack Web Developer specialized in crafting creative and attractive interfaces",
     color: "#1B263B",
     social: {
       linkedin: "https://linkedin.com/in/zaid-salman-655349327",
@@ -71,13 +74,13 @@ const teamMembers = [
   {
     name: "Ali Amjad",
     role: "UI/UX Designer & QA Tester",
-    image: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=800&auto=format&fit=crop&q=60",
+    image: ali,
     bio: "User advocate translating needs into intuitive designs",
     color: "#415A77",
     social: {
-      linkedin: "https://linkedin.com/in/aliamjad",
-      email: "ali@azkkan.com",
-      whatsapp: "https://wa.me/923001234571"
+      linkedin: "https://linkedin.com/in/muhammad-ali-amjad-a0a757331",
+      email: "#",
+      whatsapp: "https://wa.me/923281373153"
     }
   },
 ];
@@ -223,9 +226,9 @@ export default function Team() {
             transition={{ duration: 0.8, delay: 1 }}
             className="flex flex-wrap gap-8 md:gap-12 mt-8 md:mt-12 font-mono text-sm"
           >
-            <TeamStat label="Members" value={teamMembers.length} />
-            <TeamStat label="Countries" value="5+" />
-            <TeamStat label="Experience" value="50+ Years" />
+            <TeamStat label="Core Members" value={teamMembers.length} />
+            <TeamStat label="Scope" value="WorldWide" />
+            <TeamStat label="Motto" value="Make it work, make it right, make it fast" />
           </motion.div>
         </div>
 

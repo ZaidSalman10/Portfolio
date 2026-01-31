@@ -11,7 +11,7 @@ export default function SmoothScroll({ children }) {
         smoothWheel: true,   // buttery mouse wheel
         smoothTouch: false,  // avoid mobile lag
         syncTouch: true,     // natural touch tracking
-        touchMultiplier: 1.5
+        touchMultiplier: 1.1
       }}
     >
       {children}
