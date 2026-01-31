@@ -6,11 +6,11 @@ export default function SmoothScroll({ children }) {
     <ReactLenis 
       root 
       options={{ 
-        lerp: 0.08,          // smoother, fluid interpolation
-        duration: 1.2,       // natural momentum (not floaty)
-        smoothWheel: true,   // buttery mouse wheel
-        smoothTouch: false,  // avoid mobile lag
-        syncTouch: true,     // natural touch tracking
+        lerp: 0.08,
+        duration: 1.2,
+        smoothWheel: true,
+        smoothTouch: false,
+        syncTouch: true,
         touchMultiplier: 1.1
       }}
     >

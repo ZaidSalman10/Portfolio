@@ -1,18 +1,15 @@
 "use client";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useRef, memo } from "react";
 import { 
   Code2, 
   Palette, 
   Rocket, 
   CheckCircle2, 
-  Zap,
   Users,
-  Target,
-  Sparkles
+  Target
 } from "lucide-react";
 
-// Our workflow phases
 const workflowPhases = [
   {
     phase: "01",
@@ -68,14 +65,98 @@ const workflowPhases = [
   }
 ];
 
+// Memoized WorkflowCard for better performance
+const WorkflowCard = memo(({ phase, title, description, icon, color, features, index }) => {
+  const container = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: container,
+    offset: ['start end', 'start start']
+  });
+
+  const scale = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
+  const opacity = useTransform(scrollYProgress, [0, 1], [0.3, 1]);
+
+  return (
+    <motion.div 
+      ref={container}
+      style={{ scale, opacity }}
+      className="sticky top-24 z-0"
+    >
+      <div className="bg-navy/40 backdrop-blur-xl border-2 border-slate/30 rounded-2xl md:rounded-3xl p-6 md:p-10 hover:border-slate/50 transition-all duration-500 group relative overflow-hidden">
+        
+        <motion.div
+          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none will-change-opacity"
+          style={{
+            background: `radial-gradient(circle at 50% 50%, ${color}20 0%, transparent 70%)`,
+          }}
+        />
+
+        <motion.div
+          className="absolute -top-8 -right-8 text-[150px] md:text-[200px] font-bold text-slate/10 leading-none pointer-events-none select-none"
+          initial={{ opacity: 0, scale: 0.5 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.2 + index * 0.1 }}
+        >
+          {phase}
+        </motion.div>
+
+        <div className="relative z-10">
+          <motion.div
+            className="inline-block p-4 bg-slate/10 rounded-2xl mb-6 text-ghost group-hover:bg-slate/20 transition-all"
+            initial={{ scale: 0, rotate: -180 }}
+            whileInView={{ scale: 1, rotate: 0 }}
+            viewport={{ once: true }}
+            transition={{ 
+              type: "spring", 
+              damping: 15, 
+              stiffness: 200,
+              delay: 0.3 + index * 0.1 
+            }}
+          >
+            {icon}
+          </motion.div>
+
+          <h3 className="text-ghost text-2xl md:text-4xl font-bold mb-4 group-hover:text-slate transition-colors">
+            {title}
+          </h3>
+
+          <p className="text-mist text-base md:text-lg leading-relaxed mb-6">
+            {description}
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {features.map((feature, i) => (
+              <motion.div
+                key={`feature-${i}`}
+                className="flex items-center gap-2 text-slate text-sm md:text-base"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.5 + index * 0.1 + i * 0.05 }}
+              >
+                <CheckCircle2 size={16} className="text-ghost flex-shrink-0" />
+                <span>{feature}</span>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        <div className="absolute top-3 left-3 w-8 h-8 border-l-2 border-t-2 border-slate/30 group-hover:border-slate/60 transition-colors" />
+        <div className="absolute bottom-3 right-3 w-8 h-8 border-r-2 border-b-2 border-slate/30 group-hover:border-slate/60 transition-colors" />
+      </div>
+    </motion.div>
+  );
+});
+WorkflowCard.displayName = 'WorkflowCard';
 
 export default function Work() {
   return (
     <section id="work" className="bg-navy py-24 md:py-32 px-6 md:px-24 relative overflow-hidden">
       
-      {/* Animated background elements */}
+      {/* Optimized background elements */}
       <motion.div
-        className="absolute top-1/4 right-0 w-96 h-96 bg-navy rounded-full blur-3xl opacity-30 pointer-events-none"
+        className="absolute top-1/4 right-0 w-72 md:w-96 h-72 md:h-96 bg-navy rounded-full blur-3xl opacity-30 pointer-events-none will-change-transform"
         animate={{
           scale: [1, 1.3, 1],
           x: [0, -50, 0],
@@ -88,7 +169,7 @@ export default function Work() {
         }}
       />
       <motion.div
-        className="absolute bottom-1/4 left-0 w-96 h-96 bg-slate rounded-full blur-3xl opacity-20 pointer-events-none"
+        className="absolute bottom-1/4 left-0 w-72 md:w-96 h-72 md:h-96 bg-slate rounded-full blur-3xl opacity-20 pointer-events-none will-change-transform"
         animate={{
           scale: [1, 1.4, 1],
           x: [0, 50, 0],
@@ -102,7 +183,6 @@ export default function Work() {
         }}
       />
 
-      {/* Grid pattern */}
       <div 
         className="absolute inset-0 opacity-[0.02] pointer-events-none"
         style={{
@@ -113,7 +193,6 @@ export default function Work() {
 
       <div className="max-w-7xl mx-auto relative z-10">
         
-        {/* Header Section */}
         <motion.div 
           className="mb-16 md:mb-24"
           initial={{ opacity: 0, y: 50 }}
@@ -121,7 +200,6 @@ export default function Work() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 1, ease: [0.33, 1, 0.68, 1] }}
         >
-          {/* Decorative line */}
           <motion.div
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
@@ -149,7 +227,6 @@ export default function Work() {
               </motion.span>
             ))}
             
-            {/* Glow effect */}
             <motion.div
               className="absolute inset-0 blur-3xl bg-gradient-to-r from-ghost/30 to-transparent pointer-events-none"
               animate={{ opacity: [0.2, 0.5, 0.2] }}
@@ -171,18 +248,14 @@ export default function Work() {
           </motion.p>
         </motion.div>
 
-        {/* Workflow Phases */}
         <div className="mb-20 md:mb-32">
           <div className="grid grid-cols-1 gap-8 md:gap-12">
             {workflowPhases.map((phase, index) => (
-              <WorkflowCard key={index} {...phase} index={index} />
+              <WorkflowCard key={`phase-${index}`} {...phase} index={index} />
             ))}
           </div>
         </div>
 
-        
-
-        {/* Customer Satisfaction Promise */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -190,9 +263,8 @@ export default function Work() {
           transition={{ duration: 1, delay: 0.3, ease: [0.33, 1, 0.68, 1] }}
           className="relative bg-gradient-to-br from-navy/50 via-navy/30 to-transparent backdrop-blur-xl border-2 border-slate/30 rounded-3xl p-8 md:p-12 overflow-hidden group"
         >
-          {/* Animated background */}
           <motion.div
-            className="absolute inset-0 bg-gradient-to-br from-slate/10 via-transparent to-transparent pointer-events-none"
+            className="absolute inset-0 bg-gradient-to-br from-slate/10 via-transparent to-transparent pointer-events-none will-change-auto"
             animate={{
               backgroundPosition: ['0% 0%', '100% 100%'],
             }}
@@ -204,7 +276,6 @@ export default function Work() {
             style={{ backgroundSize: '200% 200%' }}
           />
 
-          {/* Corner frames */}
           <div className="absolute top-4 left-4 w-12 h-12 border-l-2 border-t-2 border-slate/30 group-hover:border-slate/60 transition-colors" />
           <div className="absolute bottom-4 right-4 w-12 h-12 border-r-2 border-b-2 border-slate/30 group-hover:border-slate/60 transition-colors" />
 
@@ -236,96 +307,5 @@ export default function Work() {
 
       </div>
     </section>
-  );
-}
-
-// Workflow Card Component
-function WorkflowCard({ phase, title, description, icon, color, features, index }) {
-  const container = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: container,
-    offset: ['start end', 'start start']
-  });
-
-  const scale = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
-  const opacity = useTransform(scrollYProgress, [0, 1], [0.3, 1]);
-
-  return (
-    <motion.div 
-      ref={container}
-      style={{ scale, opacity }}
-      className="sticky top-24 z-0"
-    >
-      <div className="bg-navy/40 backdrop-blur-xl border-2 border-slate/30 rounded-2xl md:rounded-3xl p-6 md:p-10 hover:border-slate/50 transition-all duration-500 group relative overflow-hidden">
-        
-        {/* Animated background glow */}
-        <motion.div
-          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-          style={{
-            background: `radial-gradient(circle at 50% 50%, ${color}20 0%, transparent 70%)`,
-          }}
-        />
-
-        {/* Phase number */}
-        <motion.div
-          className="absolute -top-8 -right-8 text-[150px] md:text-[200px] font-bold text-slate/10 leading-none pointer-events-none"
-          initial={{ opacity: 0, scale: 0.5 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.2 + index * 0.1 }}
-        >
-          {phase}
-        </motion.div>
-
-        <div className="relative z-10">
-          {/* Icon */}
-          <motion.div
-            className="inline-block p-4 bg-slate/10 rounded-2xl mb-6 text-ghost group-hover:bg-slate/20 transition-all"
-            initial={{ scale: 0, rotate: -180 }}
-            whileInView={{ scale: 1, rotate: 0 }}
-            viewport={{ once: true }}
-            transition={{ 
-              type: "spring", 
-              damping: 15, 
-              stiffness: 200,
-              delay: 0.3 + index * 0.1 
-            }}
-          >
-            {icon}
-          </motion.div>
-
-          {/* Title */}
-          <h3 className="text-ghost text-2xl md:text-4xl font-bold mb-4 group-hover:text-slate transition-colors">
-            {title}
-          </h3>
-
-          {/* Description */}
-          <p className="text-mist text-base md:text-lg leading-relaxed mb-6">
-            {description}
-          </p>
-
-          {/* Features */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {features.map((feature, i) => (
-              <motion.div
-                key={i}
-                className="flex items-center gap-2 text-slate text-sm md:text-base"
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.5 + index * 0.1 + i * 0.05 }}
-              >
-                <CheckCircle2 size={16} className="text-ghost flex-shrink-0" />
-                <span>{feature}</span>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        {/* Corner frames */}
-        <div className="absolute top-3 left-3 w-8 h-8 border-l-2 border-t-2 border-slate/30 group-hover:border-slate/60 transition-colors" />
-        <div className="absolute bottom-3 right-3 w-8 h-8 border-r-2 border-b-2 border-slate/30 group-hover:border-slate/60 transition-colors" />
-      </div>
-    </motion.div>
   );
 }
