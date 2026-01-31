@@ -5,6 +5,7 @@ import { Linkedin, Twitter, Mail, MessageCircle } from "lucide-react";
 import { useState, useRef } from "react";
 import kamran from "../resources/kamran.jpeg"
 import khubaib from "../resources/khubaib.jpeg"
+import zaid from "../resources/zaid.jpeg"
 
 const teamMembers = [
   {
@@ -15,7 +16,7 @@ const teamMembers = [
     color: "#1B263B",
     social: {
       linkedin: "https://linkedin.com/in/m-kamran-sattar-885176345",
-      email: "kamran@azkkan.com",
+      email: "mkammransattar111@gmail.com",
       whatsapp: "https://wa.me/923198653881" 
     }
   },
@@ -58,7 +59,7 @@ const teamMembers = [
   {
     name: "Zaid Salman",
     role: "Frontend Lead",
-    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800&auto=format&fit=crop&q=60",
+    image: zaid,
     bio: "Infrastructure expert ensuring rock-solid backends",
     color: "#1B263B",
     social: {
