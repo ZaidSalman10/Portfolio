@@ -529,32 +529,38 @@ export default function Team() {
               className="absolute -top-6 md:-top-8 left-0 h-[2px] w-16 md:w-24 bg-gradient-to-r from-slate via-ghost to-transparent origin-left"
             />
 
-            <h2 className="text-ghost text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 md:mb-8 relative">
-              {"The Minds".split('').map((char, i) => (
+            <h2 className="text-ghost text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 md:mb-8 relative overflow-visible">
+
+            {/* Animated text wrapper */}
+            <span className="inline-flex flex-wrap justify-center whitespace-nowrap relative z-10">
+                {"The Minds".split("").map((char, i) => (
                 <motion.span
-                  key={`minds-${i}`}
-                  initial={{ opacity: 0, y: 50, rotateX: 90 }}
-                  whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ 
-                    duration: 0.6, 
+                    key={`minds-${i}`}
+                    initial={{ opacity: 0, y: 30, rotateX: 80 }}
+                    whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                    viewport={{ once: true }}
+                    transition={{
+                    duration: 0.6,
                     delay: i * 0.05,
-                    ease: [0.33, 1, 0.68, 1]
-                  }}
-                  className="inline-block hover:text-slate hover:scale-110 transition-all duration-300 cursor-default"
-                  style={{ transformStyle: 'preserve-3d' }}
+                    ease: [0.33, 1, 0.68, 1],
+                    }}
+                    className="inline-block whitespace-pre cursor-default transition-transform duration-300 hover:text-slate hover:scale-110"
+                    style={{ transformStyle: "preserve-3d" }}
                 >
-                  {char === ' ' ? '\u00A0' : char}
+                    {char}
                 </motion.span>
-              ))}
-              
-              <motion.div
+                ))}
+            </span>
+
+            {/* Glow / gradient overlay */}
+            <motion.div
                 className="absolute inset-0 blur-3xl bg-gradient-to-r from-ghost/30 to-transparent pointer-events-none"
                 animate={{ opacity: [0.2, 0.5, 0.2] }}
-                transition={{ duration: 3, repeat: Infinity }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 aria-hidden="true"
-              />
+            />
             </h2>
+
 
             <motion.p 
               initial={{ opacity: 0, x: -30 }}
