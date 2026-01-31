@@ -1,51 +1,82 @@
 "use client";
 import { motion, useSpring, useMotionValue } from "framer-motion";
 import Image from "next/image";
-import { Linkedin, Twitter, Mail } from "lucide-react";
+import { Linkedin, Twitter, Mail, MessageCircle } from "lucide-react";
 import { useState, useRef } from "react";
+import kamran from "../resources/kamran.jpeg"
 
 const teamMembers = [
   {
-    name: "Alex V.",
+    name: "Kamran Sattar",
     role: "Founder & CEO",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&auto=format&fit=crop&q=60",
-    bio: "Visionary leader with 10+ years in digital innovation",
+    image: kamran,
+    bio: "Visionary leader with passion and enthusiasm in digital innovation",
     color: "#1B263B",
+    social: {
+      linkedin: "https://linkedin.com/in/kamransattar",
+      email: "kamran@azkkan.com",
+      whatsapp: "https://wa.me/923198653881" // WhatsApp number format: country code + number (no + or spaces)
+    }
   },
   {
-    name: "Sarah K.",
+    name: "Khubaib Asif",
     role: "Creative Director",
     image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&auto=format&fit=crop&q=60",
     bio: "Award-winning designer crafting memorable experiences",
     color: "#415A77",
+    social: {
+      linkedin: "https://linkedin.com/in/khubaibasif",
+      email: "khubaib@azkkan.com",
+      whatsapp: "https://wa.me/923001234567"
+    }
   },
   {
-    name: "Marcus R.",
+    name: "Ahsan Subhani",
     role: "Lead Architect",
     image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=800&auto=format&fit=crop&q=60",
     bio: "Systems architect building scalable solutions",
     color: "#778DA9",
+    social: {
+      linkedin: "https://linkedin.com/in/ahsansubhani",
+      email: "ahsan@azkkan.com",
+      whatsapp: "https://wa.me/923001234568"
+    }
   },
   {
-    name: "Elena D.",
+    name: "Numair Jahazi",
     role: "Frontend Lead",
     image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&auto=format&fit=crop&q=60",
     bio: "Performance-obsessed frontend wizard",
     color: "#0D1B2A",
+    social: {
+      linkedin: "https://linkedin.com/in/numairjahazi",
+      email: "numair@azkkan.com",
+      whatsapp: "https://wa.me/923001234569"
+    }
   },
   {
-    name: "David W.",
+    name: "Zaid Salman",
     role: "Backend Lead",
     image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800&auto=format&fit=crop&q=60",
     bio: "Infrastructure expert ensuring rock-solid backends",
     color: "#1B263B",
+    social: {
+      linkedin: "https://linkedin.com/in/zaidsalman",
+      email: "zaid@azkkan.com",
+      whatsapp: "https://wa.me/923001234570"
+    }
   },
   {
-    name: "Jessica L.",
+    name: "Ali Amjad",
     role: "UX Strategy",
     image: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=800&auto=format&fit=crop&q=60",
     bio: "User advocate translating needs into intuitive designs",
     color: "#415A77",
+    social: {
+      linkedin: "https://linkedin.com/in/aliamjad",
+      email: "ali@azkkan.com",
+      whatsapp: "https://wa.me/923001234571"
+    }
   },
 ];
 
@@ -236,7 +267,7 @@ function TeamStat({ label, value }) {
   );
 }
 
-// ✅ PERFECTED: Smooth flip card with better animations
+// Team Card Component
 function TeamCard({ member, index }) {
   const [isFlipped, setIsFlipped] = useState(false);
   const cardRef = useRef(null);
@@ -247,9 +278,9 @@ function TeamCard({ member, index }) {
   const rotateX = useSpring(0, { stiffness: 300, damping: 30 });
   const rotateY = useSpring(0, { stiffness: 300, damping: 30 });
 
-  // ✅ Only apply 3D tilt on FRONT side
+  // Only apply 3D tilt on FRONT side
   const handleMouseMove = (e) => {
-    if (isFlipped) return; // Don't tilt when flipped
+    if (isFlipped) return;
     
     const rect = e.currentTarget.getBoundingClientRect();
     const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
@@ -266,8 +297,10 @@ function TeamCard({ member, index }) {
     rotateY.set(0);
   };
 
-  // ✅ Toggle flip on click - stays until clicked again
+  // Toggle flip on click - stays until clicked again
   const handleClick = (e) => {
+    // Don't flip if clicking on a social link
+    if (e.target.closest('a')) return;
     e.stopPropagation();
     setIsFlipped(!isFlipped);
   };
@@ -295,12 +328,11 @@ function TeamCard({ member, index }) {
           transformStyle: 'preserve-3d',
         }}
         animate={{
-          // ✅ Main flip rotation
           rotateY: isFlipped ? 180 : 0,
         }}
         transition={{
           duration: 0.8,
-          ease: [0.23, 1, 0.32, 1], // Custom smooth ease
+          ease: [0.23, 1, 0.32, 1],
         }}
       >
         {/* ===== FRONT SIDE ===== */}
@@ -309,7 +341,6 @@ function TeamCard({ member, index }) {
           style={{
             backfaceVisibility: 'hidden',
             transformStyle: 'preserve-3d',
-            // ✅ Apply 3D tilt only when NOT flipped
             rotateX: isFlipped ? 0 : rotateX,
             rotateY: isFlipped ? 0 : rotateY,
           }}
@@ -394,7 +425,7 @@ function TeamCard({ member, index }) {
                   {member.role}
                 </p>
                 
-                {/* Social icons with stagger animation */}
+                {/* Social icons with links */}
                 <motion.div 
                   className="flex gap-3 md:gap-4"
                   initial={{ opacity: 0, y: 10 }}
@@ -406,9 +437,24 @@ function TeamCard({ member, index }) {
                     staggerChildren: 0.1
                   }}
                 >
-                  <SocialIcon icon={<Linkedin size={16} />} delay={0} />
-                  <SocialIcon icon={<Twitter size={16} />} delay={0.1} />
-                  <SocialIcon icon={<Mail size={16} />} delay={0.2} />
+                  <SocialIcon 
+                    icon={<Linkedin size={16} />} 
+                    href={member.social.linkedin}
+                    label="LinkedIn"
+                    delay={0} 
+                  />
+                  <SocialIcon 
+                    icon={<MessageCircle size={16} />} 
+                    href={member.social.whatsapp}
+                    label="WhatsApp"
+                    delay={0.1} 
+                  />
+                  <SocialIcon 
+                    icon={<Mail size={16} />} 
+                    href={`mailto:${member.social.email}`}
+                    label="Email"
+                    delay={0.2} 
+                  />
                 </motion.div>
 
                 {/* Flip indicator with pulse animation */}
@@ -438,7 +484,7 @@ function TeamCard({ member, index }) {
               </motion.div>
             </div>
 
-            {/* Corner frames with animated appearance */}
+            {/* Corner frames */}
             <motion.div
               className="absolute top-3 md:top-4 left-3 md:left-4 w-10 md:w-12 h-10 md:h-12 border-l-2 border-t-2 border-slate/30 group-hover:border-slate/60 transition-colors duration-500"
               initial={{ opacity: 0, scale: 0 }}
@@ -452,7 +498,7 @@ function TeamCard({ member, index }) {
               transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
             />
 
-            {/* Animated spotlight following mouse */}
+            {/* Animated spotlight */}
             <motion.div
               className="absolute w-64 h-64 rounded-full blur-3xl pointer-events-none opacity-0 group-hover:opacity-50 transition-opacity duration-500"
               style={{
@@ -464,7 +510,7 @@ function TeamCard({ member, index }) {
             />
           </div>
 
-          {/* Border glow effect */}
+          {/* Border glow */}
           <div className="absolute inset-0 border-2 border-slate/20 rounded-2xl md:rounded-3xl group-hover:border-slate/50 transition-all duration-500 pointer-events-none" />
         </motion.div>
 
@@ -511,7 +557,7 @@ function TeamCard({ member, index }) {
             }}
           />
 
-          {/* Content with stagger animations */}
+          {/* Content */}
           <div className="relative z-10">
             <motion.h3 
               className="text-2xl md:text-3xl font-bold text-ghost mb-2"
@@ -561,7 +607,7 @@ function TeamCard({ member, index }) {
               {member.bio}
             </motion.p>
 
-            {/* Skills with stagger */}
+            {/* Skills */}
             <motion.div
               className="flex flex-wrap gap-2"
               initial={{ opacity: 0, y: 20 }}
@@ -611,9 +657,24 @@ function TeamCard({ member, index }) {
           >
             <div className="h-[1px] bg-gradient-to-r from-slate/50 via-slate/30 to-transparent mb-4" />
             <div className="flex gap-3 md:gap-4">
-              <SocialIcon icon={<Linkedin size={16} />} delay={0} />
-              <SocialIcon icon={<Twitter size={16} />} delay={0.1} />
-              <SocialIcon icon={<Mail size={16} />} delay={0.2} />
+              <SocialIcon 
+                icon={<Linkedin size={16} />} 
+                href={member.social.linkedin}
+                label="LinkedIn"
+                delay={0} 
+              />
+              <SocialIcon 
+                icon={<MessageCircle size={16} />} 
+                href={member.social.whatsapp}
+                label="WhatsApp"
+                delay={0.1} 
+              />
+              <SocialIcon 
+                icon={<Mail size={16} />} 
+                href={`mailto:${member.social.email}`}
+                label="Email"
+                delay={0.2} 
+              />
             </div>
           </motion.div>
 
@@ -621,7 +682,7 @@ function TeamCard({ member, index }) {
           <div className="absolute top-3 md:top-4 left-3 md:left-4 w-10 md:w-12 h-10 md:h-12 border-l-2 border-t-2 border-slate/40" />
           <div className="absolute bottom-3 md:bottom-4 right-3 md:right-4 w-10 md:w-12 h-10 md:h-12 border-r-2 border-b-2 border-slate/40" />
           
-          {/* Click to flip back indicator */}
+          {/* Click to flip back */}
           <motion.div
             className="absolute top-3 md:top-4 right-3 md:right-4 text-slate/60 text-xs font-mono uppercase"
             initial={{ opacity: 0 }}
@@ -633,7 +694,7 @@ function TeamCard({ member, index }) {
         </motion.div>
       </motion.div>
 
-      {/* Outer glow effect */}
+      {/* Outer glow */}
       <motion.div
         className="absolute inset-0 rounded-2xl md:rounded-3xl pointer-events-none"
         animate={{
@@ -650,10 +711,13 @@ function TeamCard({ member, index }) {
   );
 }
 
-// Social icon with enhanced animations
-function SocialIcon({ icon, delay = 0 }) {
+// Social icon with links
+function SocialIcon({ icon, href, label, delay = 0 }) {
   return (
-    <motion.button
+    <motion.a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
       className="p-2 md:p-3 bg-slate/10 border border-slate/20 rounded-full hover:bg-ghost hover:text-void transition-all backdrop-blur-sm relative overflow-hidden group"
       initial={{ opacity: 0, scale: 0 }}
       whileInView={{ opacity: 1, scale: 1 }}
@@ -670,17 +734,18 @@ function SocialIcon({ icon, delay = 0 }) {
         rotate: 360,
       }}
       whileTap={{ scale: 0.9 }}
-      aria-label="Social media link"
+      aria-label={label}
+      onClick={(e) => e.stopPropagation()} // Prevent card flip when clicking link
     >
       {icon}
       
-      {/* Shine effect on hover */}
+      {/* Shine effect */}
       <motion.div
         className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent pointer-events-none"
         initial={{ x: '-100%', opacity: 0 }}
         whileHover={{ x: '100%', opacity: 1 }}
         transition={{ duration: 0.6 }}
       />
-    </motion.button>
+    </motion.a>
   );
 }
