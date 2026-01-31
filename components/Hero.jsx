@@ -16,7 +16,7 @@ export default function Hero() {
   const heroOpacity = useTransform(scrollY, [0, 400], [1, 0]);
   const heroScale = useTransform(scrollY, [0, 400], [1, 0.95]);
 
-  // 2. MOUSE PHYSICS (Optimized)
+  // 2. MOUSE PHYSICS
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -139,16 +139,16 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Description */}
+        {/* Description (Updated Text) */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1 }}
-          className="mt-12 md:ml-2"
+          className="mt-12 md:ml-2 "
         >
           <p className="text-mist text-lg md:text-xl font-light leading-relaxed">
             We forge heavy-duty digital experiences. Specialized in Web Dev, we provide services 
-            <br />where precision engineering meets artistic chaos.
+            <br />where precision engineering artistic chaos.
           </p>
         </motion.div>
       </motion.div>
@@ -161,9 +161,13 @@ export default function Hero() {
         className="absolute bottom-10 right-6 md:right-24 flex flex-col items-center gap-4 z-20 cursor-pointer group"
         onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
       >
-        <span className="text-xs font-mono text-mist uppercase writing-vertical-rl group-hover:text-ghost transition-colors">
-          Let's Explore More, <br /> <center>Scroll Down</center>
+        {/* Updated Text with Valid JSX */}
+        <span className="text-xs font-mono text-mist uppercase writing-vertical-rl group-hover:text-ghost transition-colors tracking-widest flex items-center gap-4">
+          Let's Explore More
+          <span className="rotate-90 md:rotate-0 mt-2 block text-slate">Scroll Down</span>
         </span>
+
+        {/* Line Animation */}
         <div className="relative w-[1px] h-24 bg-navy overflow-hidden">
           <motion.div 
             animate={{ y: ["-100%", "100%"] }}
@@ -173,7 +177,7 @@ export default function Hero() {
         </div>
       </motion.div>
 
-      {/* ================= CORNER ACCENTS (Tech Feel) ================= */}
+      {/* ================= CORNER ACCENTS ================= */}
       <div className="absolute top-24 left-6 md:left-24 w-2 h-2 bg-slate rounded-full opacity-50" />
       <div className="absolute bottom-24 left-6 md:left-24 w-2 h-2 bg-slate rounded-full opacity-50" />
 

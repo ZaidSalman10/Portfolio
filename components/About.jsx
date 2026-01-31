@@ -2,6 +2,7 @@
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import Image from "next/image";
 import { useRef, useState, useEffect } from "react";
+import aboutImg from "../resources/about.jpg"
 
 export default function About() {
   const sectionRef = useRef(null);
@@ -15,8 +16,6 @@ export default function About() {
   const rotateY = useTransform(scrollYProgress, [0, 0.5, 1], [25, 0, -10]);
   const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0.8]);
   const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
-
-  const abstractImage = "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2672&auto=format&fit=crop";
 
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
@@ -144,10 +143,10 @@ export default function About() {
             }}
           >
             <Image 
-              src={abstractImage} 
+              src={aboutImg} 
               alt="AZKKAN HQ" 
               fill 
-              className="object-cover transition-transform duration-1000 ease-out group-hover:scale-110"
+              className=" transition-transform duration-1000 ease-out group-hover:scale-110"
             />
           </motion.div>
 

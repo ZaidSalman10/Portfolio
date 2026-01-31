@@ -2,7 +2,7 @@
 import { motion, useSpring, useMotionValue } from "framer-motion";
 import Image from "next/image";
 import { Linkedin, Twitter, Mail } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 const teamMembers = [
   {
@@ -51,11 +51,11 @@ const teamMembers = [
 
 export default function Team() {
   return (
-    <section id="team" className="py-32 bg-void relative overflow-hidden px-6 md:px-24">
+    <section id="team" className="py-24 md:py-32 bg-void relative overflow-hidden px-6 md:px-24">
       
       {/* Animated background elements */}
       <motion.div
-        className="absolute top-1/4 right-0 w-96 h-96 bg-navy rounded-full blur-3xl opacity-30"
+        className="absolute top-1/4 right-0 w-72 md:w-96 h-72 md:h-96 bg-navy rounded-full blur-3xl opacity-30 pointer-events-none"
         animate={{
           scale: [1, 1.3, 1],
           x: [0, 50, 0],
@@ -68,7 +68,7 @@ export default function Team() {
         }}
       />
       <motion.div
-        className="absolute bottom-1/4 left-0 w-96 h-96 bg-slate rounded-full blur-3xl opacity-20"
+        className="absolute bottom-1/4 left-0 w-72 md:w-96 h-72 md:h-96 bg-slate rounded-full blur-3xl opacity-20 pointer-events-none"
         animate={{
           scale: [1, 1.4, 1],
           x: [0, -50, 0],
@@ -84,7 +84,7 @@ export default function Team() {
 
       {/* Grid pattern */}
       <div 
-        className="absolute inset-0 opacity-[0.02]"
+        className="absolute inset-0 opacity-[0.02] pointer-events-none"
         style={{
           backgroundImage: `radial-gradient(circle at 50% 50%, #415A77 1px, transparent 1px)`,
           backgroundSize: '60px 60px',
@@ -94,8 +94,8 @@ export default function Team() {
       {/* Floating particles */}
       {[...Array(25)].map((_, i) => (
         <motion.div
-          key={i}
-          className="absolute w-1 h-1 bg-slate rounded-full"
+          key={`team-particle-${i}`}
+          className="absolute w-1 h-1 bg-slate rounded-full pointer-events-none"
           style={{
             left: `${Math.random() * 100}%`,
             top: `${Math.random() * 100}%`,
@@ -114,13 +114,13 @@ export default function Team() {
         />
       ))}
 
-      <div className="relative z-10">
+      <div className="relative z-10 max-w-7xl mx-auto">
         {/* Header section */}
-        <div className="mb-24">
+        <div className="mb-16 md:mb-24">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 1, ease: [0.33, 1, 0.68, 1] }}
             className="relative"
           >
@@ -128,18 +128,18 @@ export default function Team() {
             <motion.div
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 1.2, delay: 0.3 }}
-              className="absolute -top-8 left-0 h-[2px] w-24 bg-gradient-to-r from-slate via-ghost to-transparent origin-left"
+              className="absolute -top-6 md:-top-8 left-0 h-[2px] w-16 md:w-24 bg-gradient-to-r from-slate via-ghost to-transparent origin-left"
             />
 
-            <h2 className="text-ghost text-5xl md:text-8xl font-bold mb-8 relative inline-block">
+            <h2 className="text-ghost text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 md:mb-8 relative">
               {"The Minds".split('').map((char, i) => (
                 <motion.span
-                  key={i}
+                  key={`minds-${i}`}
                   initial={{ opacity: 0, y: 50, rotateX: 90 }}
                   whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: true, margin: "-100px" }}
                   transition={{ 
                     duration: 0.6, 
                     delay: i * 0.05,
@@ -154,18 +154,19 @@ export default function Team() {
               
               {/* Glow effect */}
               <motion.div
-                className="absolute inset-0 blur-3xl bg-gradient-to-r from-ghost/30 to-transparent"
+                className="absolute inset-0 blur-3xl bg-gradient-to-r from-ghost/30 to-transparent pointer-events-none"
                 animate={{ opacity: [0.2, 0.5, 0.2] }}
                 transition={{ duration: 3, repeat: Infinity }}
+                aria-hidden="true"
               />
             </h2>
 
             <motion.p 
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8, delay: 0.6 }}
-              className="text-mist max-w-2xl text-lg md:text-xl leading-relaxed relative"
+              className="text-mist max-w-2xl text-base md:text-lg lg:text-xl leading-relaxed relative"
             >
               We are a collective of visionaries, engineers, and artists. 
               United by a passion for the impossible.
@@ -175,7 +176,7 @@ export default function Team() {
                 className="absolute -bottom-2 left-0 h-[1px] bg-gradient-to-r from-slate to-transparent"
                 initial={{ width: 0 }}
                 whileInView={{ width: '60%' }}
-                viewport={{ once: true }}
+                viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 1, delay: 0.8 }}
               />
             </motion.p>
@@ -185,9 +186,9 @@ export default function Team() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, delay: 1 }}
-            className="flex gap-12 mt-12 font-mono text-sm"
+            className="flex flex-wrap gap-8 md:gap-12 mt-8 md:mt-12 font-mono text-sm"
           >
             <TeamStat label="Members" value={teamMembers.length} />
             <TeamStat label="Countries" value="5+" />
@@ -196,9 +197,9 @@ export default function Team() {
         </div>
 
         {/* Team grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10">
           {teamMembers.map((member, index) => (
-            <TeamCard key={index} member={member} index={index} />
+            <TeamCard key={`team-${index}`} member={member} index={index} />
           ))}
         </div>
       </div>
@@ -207,9 +208,9 @@ export default function Team() {
       <motion.div
         initial={{ scaleX: 0 }}
         whileInView={{ scaleX: 1 }}
-        viewport={{ once: true }}
+        viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 1.5, delay: 0.5 }}
-        className="mt-24 h-[1px] bg-gradient-to-r from-transparent via-slate/50 to-transparent origin-center"
+        className="mt-16 md:mt-24 h-[1px] bg-gradient-to-r from-transparent via-slate/50 to-transparent origin-center max-w-7xl mx-auto"
       />
     </section>
   );
@@ -220,7 +221,7 @@ function TeamStat({ label, value }) {
   return (
     <motion.div
       className="relative group cursor-default"
-      whileHover={{ scale: 1.1, y: -5 }}
+      whileHover={{ scale: 1.05, y: -5 }}
       transition={{ duration: 0.3 }}
     >
       <motion.div
@@ -229,32 +230,35 @@ function TeamStat({ label, value }) {
       />
       <div className="relative">
         <span className="block text-slate text-xs uppercase tracking-wider mb-1">{label}</span>
-        <span className="block text-ghost text-2xl font-bold">{value}</span>
+        <span className="block text-ghost text-xl md:text-2xl font-bold">{value}</span>
       </div>
     </motion.div>
   );
 }
 
-// Enhanced team card with 3D flip and holographic effects
+// ✅ PERFECTED: Smooth flip card with better animations
 function TeamCard({ member, index }) {
   const [isFlipped, setIsFlipped] = useState(false);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const cardRef = useRef(null);
 
+  // Smooth spring animations for 3D tilt
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-  const rotateX = useSpring(useMotionValue(0), { stiffness: 200, damping: 30 });
-  const rotateY = useSpring(useMotionValue(0), { stiffness: 200, damping: 30 });
+  const rotateX = useSpring(0, { stiffness: 300, damping: 30 });
+  const rotateY = useSpring(0, { stiffness: 300, damping: 30 });
 
+  // ✅ Only apply 3D tilt on FRONT side
   const handleMouseMove = (e) => {
+    if (isFlipped) return; // Don't tilt when flipped
+    
     const rect = e.currentTarget.getBoundingClientRect();
     const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
     const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
     
-    setMousePosition({ x, y });
     mouseX.set(x);
     mouseY.set(y);
-    rotateX.set(y * 10);
-    rotateY.set(-x * 10);
+    rotateX.set(y * 12);
+    rotateY.set(-x * 12);
   };
 
   const handleMouseLeave = () => {
@@ -262,305 +266,421 @@ function TeamCard({ member, index }) {
     rotateY.set(0);
   };
 
+  // ✅ Toggle flip on click - stays until clicked again
+  const handleClick = (e) => {
+    e.stopPropagation();
+    setIsFlipped(!isFlipped);
+  };
+
   return (
     <motion.div
+      ref={cardRef}
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
+      viewport={{ once: true, margin: "-50px" }}
       transition={{ 
         duration: 0.8, 
         delay: index * 0.1,
         ease: [0.33, 1, 0.68, 1]
       }}
-      className="relative h-[500px] w-full perspective-1000"
-      style={{ perspective: 1000 }}
+      className="relative h-[450px] md:h-[500px] w-full group"
+      style={{ perspective: 1500 }}
     >
       <motion.div
         className="relative w-full h-full cursor-pointer"
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        onClick={() => setIsFlipped(!isFlipped)}
+        onClick={handleClick}
         style={{
-          rotateX,
-          rotateY,
           transformStyle: 'preserve-3d',
         }}
-        whileHover={{ scale: 1.02 }}
-        animate={{ rotateY: isFlipped ? 180 : 0 }}
-        transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
+        animate={{
+          // ✅ Main flip rotation
+          rotateY: isFlipped ? 180 : 0,
+        }}
+        transition={{
+          duration: 0.8,
+          ease: [0.23, 1, 0.32, 1], // Custom smooth ease
+        }}
       >
-        {/* Front of card */}
+        {/* ===== FRONT SIDE ===== */}
         <motion.div
-          className="absolute inset-0 w-full h-full rounded-3xl overflow-hidden bg-navy"
+          className="absolute inset-0 w-full h-full rounded-2xl md:rounded-3xl overflow-hidden bg-navy shadow-2xl"
           style={{
             backfaceVisibility: 'hidden',
             transformStyle: 'preserve-3d',
+            // ✅ Apply 3D tilt only when NOT flipped
+            rotateX: isFlipped ? 0 : rotateX,
+            rotateY: isFlipped ? 0 : rotateY,
           }}
         >
-          {/* Image with effects */}
-          <div className="relative w-full h-full group">
-            {/* Main image */}
-            <motion.div
+          <div className="relative w-full h-full">
+            {/* Image container with parallax */}
+            <motion.div 
               className="absolute inset-0"
               style={{
-                x: mousePosition.x * 20,
-                y: mousePosition.y * 20,
+                x: mouseX.get() * 15,
+                y: mouseY.get() * 15,
               }}
-              transition={{ duration: 0.3 }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
             >
               <Image
                 src={member.image}
                 alt={member.name}
                 fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 className="object-cover transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-110"
+                priority={index < 3}
               />
             </motion.div>
 
-            {/* Holographic overlay */}
+            {/* Holographic shimmer effect */}
             <motion.div
-              className="absolute inset-0 bg-gradient-to-br from-transparent via-slate/20 to-transparent opacity-0 group-hover:opacity-100 mix-blend-overlay"
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none"
               style={{
-                backgroundPosition: `${mousePosition.x * 100}% ${mousePosition.y * 100}%`,
+                background: `linear-gradient(135deg, 
+                  transparent 0%, 
+                  rgba(120, 141, 169, 0.1) 25%, 
+                  rgba(120, 141, 169, 0.2) 50%, 
+                  rgba(120, 141, 169, 0.1) 75%, 
+                  transparent 100%)`,
                 backgroundSize: '200% 200%',
               }}
-              transition={{ duration: 0.3 }}
-            />
-
-            {/* Animated gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-void via-void/70 to-transparent opacity-90 group-hover:opacity-70 transition-opacity" />
-
-            {/* Scanline effect */}
-            <motion.div
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                background: 'repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(120, 141, 169, 0.05) 3px, rgba(120, 141, 169, 0.05) 6px)',
-              }}
               animate={{
-                y: [0, 40, 0],
+                backgroundPosition: ['0% 0%', '100% 100%'],
               }}
               transition={{
-                duration: 4,
+                duration: 3,
                 repeat: Infinity,
                 ease: "linear",
               }}
             />
 
-            {/* Spotlight following mouse */}
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-void via-void/80 to-transparent opacity-90 group-hover:opacity-70 transition-opacity duration-500" />
+
+            {/* Scanline effect */}
             <motion.div
-              className="absolute w-64 h-64 rounded-full blur-3xl pointer-events-none"
+              className="absolute inset-0 pointer-events-none opacity-30"
               style={{
-                background: `radial-gradient(circle, ${member.color} 0%, transparent 70%)`,
-                left: `${(mousePosition.x + 1) * 50}%`,
-                top: `${(mousePosition.y + 1) * 50}%`,
-                transform: 'translate(-50%, -50%)',
-                opacity: 0.4,
+                background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(120, 141, 169, 0.1) 2px, rgba(120, 141, 169, 0.1) 4px)',
               }}
-              transition={{ duration: 0.3 }}
+              animate={{ y: ['0%', '100%'] }}
+              transition={{
+                duration: 8,
+                repeat: Infinity,
+                ease: "linear",
+              }}
             />
 
             {/* Content */}
-            <div className="absolute bottom-0 left-0 w-full p-8 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-              <motion.h3 
-                className="text-3xl font-bold text-ghost mb-2 relative"
-                initial={{ y: 20, opacity: 0 }}
-                whileInView={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-              >
-                {member.name}
-                <motion.span
-                  className="absolute -bottom-1 left-0 h-[2px] bg-gradient-to-r from-slate to-transparent"
-                  initial={{ width: 0 }}
-                  whileInView={{ width: '60%' }}
-                  transition={{ duration: 0.8, delay: 0.5 + index * 0.1 }}
-                />
-              </motion.h3>
-              
-              <p className="text-slate font-mono text-sm uppercase tracking-widest mb-6">
-                {member.role}
-              </p>
-              
-              {/* Social icons */}
-              <motion.div 
-                className="flex gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100"
-                initial={{ y: 20 }}
-                whileInView={{ y: 0 }}
-                transition={{ duration: 0.6, delay: 0.7 + index * 0.1 }}
-              >
-                <SocialIcon icon={<Linkedin size={18} />} />
-                <SocialIcon icon={<Twitter size={18} />} />
-                <SocialIcon icon={<Mail size={18} />} />
-              </motion.div>
-
-              {/* Flip indicator */}
+            <div className="absolute bottom-0 left-0 w-full p-6 md:p-8">
               <motion.div
-                className="absolute bottom-4 right-4 text-slate/50 text-xs font-mono uppercase flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity"
-                animate={{ x: [0, 5, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
               >
-                Click to flip
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                  <path d="M6 2L10 6L6 10M2 6H10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
+                <h3 className="text-2xl md:text-3xl font-bold text-ghost mb-2 relative">
+                  {member.name}
+                  <motion.span
+                    className="absolute -bottom-1 left-0 h-[2px] bg-gradient-to-r from-slate to-transparent"
+                    initial={{ width: 0 }}
+                    animate={{ width: isFlipped ? 0 : '60%' }}
+                    transition={{ duration: 0.6 }}
+                  />
+                </h3>
+                
+                <p className="text-slate font-mono text-xs md:text-sm uppercase tracking-widest mb-4 md:mb-6">
+                  {member.role}
+                </p>
+                
+                {/* Social icons with stagger animation */}
+                <motion.div 
+                  className="flex gap-3 md:gap-4"
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ 
+                    duration: 0.5, 
+                    delay: 0.4 + index * 0.1,
+                    staggerChildren: 0.1
+                  }}
+                >
+                  <SocialIcon icon={<Linkedin size={16} />} delay={0} />
+                  <SocialIcon icon={<Twitter size={16} />} delay={0.1} />
+                  <SocialIcon icon={<Mail size={16} />} delay={0.2} />
+                </motion.div>
+
+                {/* Flip indicator with pulse animation */}
+                <motion.div
+                  className="absolute bottom-3 md:bottom-4 right-3 md:right-4 text-slate/60 text-xs font-mono uppercase flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity"
+                  animate={{ 
+                    x: [0, 5, 0],
+                  }}
+                  transition={{ 
+                    duration: 2, 
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                >
+                  <span className="hidden sm:inline">Click to flip</span>
+                  <motion.svg 
+                    width="12" 
+                    height="12" 
+                    viewBox="0 0 12 12" 
+                    fill="none"
+                    animate={{ rotate: [0, 360] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                  >
+                    <path d="M6 2L10 6L6 10M2 6H10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </motion.svg>
+                </motion.div>
               </motion.div>
             </div>
 
-            {/* Corner frames */}
+            {/* Corner frames with animated appearance */}
             <motion.div
-              className="absolute top-4 left-4 w-12 h-12 border-l-2 border-t-2 border-slate/30 group-hover:border-slate/60 transition-colors"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
+              className="absolute top-3 md:top-4 left-3 md:left-4 w-10 md:w-12 h-10 md:h-12 border-l-2 border-t-2 border-slate/30 group-hover:border-slate/60 transition-colors duration-500"
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
             />
             <motion.div
-              className="absolute bottom-4 right-4 w-12 h-12 border-r-2 border-b-2 border-slate/30 group-hover:border-slate/60 transition-colors"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
+              className="absolute bottom-3 md:bottom-4 right-3 md:right-4 w-10 md:w-12 h-10 md:h-12 border-r-2 border-b-2 border-slate/30 group-hover:border-slate/60 transition-colors duration-500"
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
+            />
+
+            {/* Animated spotlight following mouse */}
+            <motion.div
+              className="absolute w-64 h-64 rounded-full blur-3xl pointer-events-none opacity-0 group-hover:opacity-50 transition-opacity duration-500"
+              style={{
+                background: `radial-gradient(circle, ${member.color} 0%, transparent 70%)`,
+                left: `${(mouseX.get() + 1) * 50}%`,
+                top: `${(mouseY.get() + 1) * 50}%`,
+                transform: 'translate(-50%, -50%)',
+              }}
             />
           </div>
 
-          {/* Aesthetic border */}
-          <div className="absolute inset-0 border-2 border-slate/20 rounded-3xl group-hover:border-slate/50 transition-colors pointer-events-none" />
+          {/* Border glow effect */}
+          <div className="absolute inset-0 border-2 border-slate/20 rounded-2xl md:rounded-3xl group-hover:border-slate/50 transition-all duration-500 pointer-events-none" />
         </motion.div>
 
-        {/* Back of card */}
+        {/* ===== BACK SIDE ===== */}
         <motion.div
-          className="absolute inset-0 w-full h-full rounded-3xl overflow-hidden bg-gradient-to-br from-navy via-[#1a2942] to-void border-2 border-slate/30 p-8 flex flex-col justify-between"
+          className="absolute inset-0 w-full h-full rounded-2xl md:rounded-3xl overflow-hidden bg-gradient-to-br from-navy via-[#1a2942] to-void border-2 border-slate/40 p-6 md:p-8 flex flex-col justify-between shadow-2xl"
           style={{
             backfaceVisibility: 'hidden',
             transformStyle: 'preserve-3d',
             rotateY: 180,
           }}
         >
-          {/* Background pattern */}
-          <div 
-            className="absolute inset-0 opacity-[0.03]"
+          {/* Animated background pattern */}
+          <motion.div 
+            className="absolute inset-0 opacity-[0.05] pointer-events-none"
             style={{
               backgroundImage: `radial-gradient(circle at 50% 50%, ${member.color} 1px, transparent 1px)`,
               backgroundSize: '30px 30px',
+            }}
+            animate={{
+              backgroundPosition: ['0% 0%', '100% 100%'],
+            }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              ease: "linear",
             }}
           />
 
           {/* Animated glow */}
           <motion.div
-            className="absolute inset-0 bg-gradient-to-br from-slate/10 via-transparent to-transparent"
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background: `radial-gradient(circle at 50% 50%, ${member.color}20 0%, transparent 70%)`,
+            }}
             animate={{
-              backgroundPosition: ['0% 0%', '100% 100%'],
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.5, 0.3],
             }}
             transition={{
-              duration: 5,
+              duration: 4,
               repeat: Infinity,
-              ease: "linear",
+              ease: "easeInOut",
             }}
-            style={{ backgroundSize: '200% 200%' }}
           />
 
+          {/* Content with stagger animations */}
           <div className="relative z-10">
             <motion.h3 
-              className="text-3xl font-bold text-ghost mb-2"
+              className="text-2xl md:text-3xl font-bold text-ghost mb-2"
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: isFlipped ? 1 : 0, y: isFlipped ? 0 : 20 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+              animate={{ 
+                opacity: isFlipped ? 1 : 0, 
+                y: isFlipped ? 0 : 20 
+              }}
+              transition={{ 
+                duration: 0.5, 
+                delay: isFlipped ? 0.2 : 0,
+                ease: [0.33, 1, 0.68, 1]
+              }}
             >
               {member.name}
             </motion.h3>
             
             <motion.p 
-              className="text-slate font-mono text-sm uppercase tracking-widest mb-6"
+              className="text-slate font-mono text-xs md:text-sm uppercase tracking-widest mb-4 md:mb-6"
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: isFlipped ? 1 : 0, y: isFlipped ? 0 : 20 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              animate={{ 
+                opacity: isFlipped ? 1 : 0, 
+                y: isFlipped ? 0 : 20 
+              }}
+              transition={{ 
+                duration: 0.5, 
+                delay: isFlipped ? 0.3 : 0,
+                ease: [0.33, 1, 0.68, 1]
+              }}
             >
               {member.role}
             </motion.p>
 
             <motion.p 
-              className="text-mist text-lg leading-relaxed mb-6"
+              className="text-mist text-base md:text-lg leading-relaxed mb-4 md:mb-6"
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: isFlipped ? 1 : 0, y: isFlipped ? 0 : 20 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
+              animate={{ 
+                opacity: isFlipped ? 1 : 0, 
+                y: isFlipped ? 0 : 20 
+              }}
+              transition={{ 
+                duration: 0.5, 
+                delay: isFlipped ? 0.4 : 0,
+                ease: [0.33, 1, 0.68, 1]
+              }}
             >
               {member.bio}
             </motion.p>
 
-            {/* Skills or achievements could go here */}
+            {/* Skills with stagger */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: isFlipped ? 1 : 0, y: isFlipped ? 0 : 20 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
               className="flex flex-wrap gap-2"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ 
+                opacity: isFlipped ? 1 : 0, 
+                y: isFlipped ? 0 : 20 
+              }}
+              transition={{ 
+                duration: 0.5, 
+                delay: isFlipped ? 0.5 : 0,
+                ease: [0.33, 1, 0.68, 1]
+              }}
             >
               {['Innovation', 'Leadership', 'Strategy'].map((skill, i) => (
-                <span 
-                  key={i}
-                  className="px-3 py-1 text-xs font-mono uppercase border border-slate/30 rounded-full text-slate"
+                <motion.span 
+                  key={`skill-${i}`}
+                  className="px-3 py-1.5 text-xs font-mono uppercase border border-slate/30 rounded-full text-slate hover:border-slate/60 hover:text-ghost hover:bg-slate/10 transition-all duration-300 cursor-default"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ 
+                    opacity: isFlipped ? 1 : 0,
+                    scale: isFlipped ? 1 : 0.8
+                  }}
+                  transition={{ 
+                    duration: 0.3,
+                    delay: isFlipped ? 0.6 + i * 0.1 : 0
+                  }}
                 >
                   {skill}
-                </span>
+                </motion.span>
               ))}
             </motion.div>
           </div>
 
-          {/* Contact info at bottom */}
+          {/* Contact section */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: isFlipped ? 1 : 0, y: isFlipped ? 0 : 20 }}
-            transition={{ duration: 0.6, delay: 0.7 }}
             className="relative z-10"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ 
+              opacity: isFlipped ? 1 : 0, 
+              y: isFlipped ? 0 : 20 
+            }}
+            transition={{ 
+              duration: 0.5, 
+              delay: isFlipped ? 0.7 : 0,
+              ease: [0.33, 1, 0.68, 1]
+            }}
           >
-            <div className="h-[1px] bg-gradient-to-r from-slate/50 to-transparent mb-4" />
-            <div className="flex gap-4">
-              <SocialIcon icon={<Linkedin size={18} />} />
-              <SocialIcon icon={<Twitter size={18} />} />
-              <SocialIcon icon={<Mail size={18} />} />
+            <div className="h-[1px] bg-gradient-to-r from-slate/50 via-slate/30 to-transparent mb-4" />
+            <div className="flex gap-3 md:gap-4">
+              <SocialIcon icon={<Linkedin size={16} />} delay={0} />
+              <SocialIcon icon={<Twitter size={16} />} delay={0.1} />
+              <SocialIcon icon={<Mail size={16} />} delay={0.2} />
             </div>
           </motion.div>
 
           {/* Corner frames */}
-          <div className="absolute top-4 left-4 w-12 h-12 border-l-2 border-t-2 border-slate/30" />
-          <div className="absolute bottom-4 right-4 w-12 h-12 border-r-2 border-b-2 border-slate/30" />
+          <div className="absolute top-3 md:top-4 left-3 md:left-4 w-10 md:w-12 h-10 md:h-12 border-l-2 border-t-2 border-slate/40" />
+          <div className="absolute bottom-3 md:bottom-4 right-3 md:right-4 w-10 md:w-12 h-10 md:h-12 border-r-2 border-b-2 border-slate/40" />
+          
+          {/* Click to flip back indicator */}
+          <motion.div
+            className="absolute top-3 md:top-4 right-3 md:right-4 text-slate/60 text-xs font-mono uppercase"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: isFlipped ? 1 : 0 }}
+            transition={{ delay: isFlipped ? 0.8 : 0 }}
+          >
+            ← Click
+          </motion.div>
         </motion.div>
       </motion.div>
 
-      {/* Outer glow on hover */}
+      {/* Outer glow effect */}
       <motion.div
-        className="absolute inset-0 rounded-3xl pointer-events-none"
+        className="absolute inset-0 rounded-2xl md:rounded-3xl pointer-events-none"
         animate={{
-          boxShadow: [
-            '0 0 0px rgba(120, 141, 169, 0)',
-            `0 0 40px ${member.color}40`,
-            '0 0 0px rgba(120, 141, 169, 0)',
-          ],
+          boxShadow: isFlipped
+            ? `0 0 60px ${member.color}60`
+            : '0 0 0px rgba(120, 141, 169, 0)',
         }}
         transition={{
-          duration: 3,
-          repeat: Infinity,
+          duration: 0.8,
           ease: "easeInOut",
-          delay: index * 0.3,
         }}
       />
     </motion.div>
   );
 }
 
-// Social icon component
-function SocialIcon({ icon }) {
+// Social icon with enhanced animations
+function SocialIcon({ icon, delay = 0 }) {
   return (
-    <motion.div
-      className="p-3 bg-slate/10 border border-slate/20 rounded-full hover:bg-ghost hover:text-void transition-all cursor-pointer backdrop-blur-sm relative overflow-hidden group"
-      whileHover={{ scale: 1.1, rotate: 360 }}
+    <motion.button
+      className="p-2 md:p-3 bg-slate/10 border border-slate/20 rounded-full hover:bg-ghost hover:text-void transition-all backdrop-blur-sm relative overflow-hidden group"
+      initial={{ opacity: 0, scale: 0 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true }}
+      transition={{ 
+        duration: 0.4, 
+        delay,
+        type: "spring",
+        stiffness: 400,
+        damping: 10
+      }}
+      whileHover={{ 
+        scale: 1.15,
+        rotate: 360,
+      }}
       whileTap={{ scale: 0.9 }}
-      transition={{ duration: 0.6 }}
+      aria-label="Social media link"
     >
       {icon}
       
-      {/* Shine effect */}
+      {/* Shine effect on hover */}
       <motion.div
-        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-        initial={{ x: '-100%' }}
-        whileHover={{ x: '100%' }}
+        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent pointer-events-none"
+        initial={{ x: '-100%', opacity: 0 }}
+        whileHover={{ x: '100%', opacity: 1 }}
         transition={{ duration: 0.6 }}
       />
-    </motion.div>
+    </motion.button>
   );
 }
