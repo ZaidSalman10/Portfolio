@@ -137,7 +137,7 @@ export default function Navbar() {
     }
   }, [lenis]);
 
-  const menuItems = ["About", "Work", "Team", "Stack"];
+  const menuItems = ["About", "Team", "Work", "Stack"];
 
   return (
     <>
