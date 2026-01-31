@@ -11,10 +11,7 @@ const ScrollIndicator = memo(() => (
     className="absolute bottom-10 right-6 md:right-24 flex flex-col items-center gap-4 z-20 cursor-pointer group"
     onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
   >
-    <span className="text-xs font-mono text-mist uppercase writing-vertical-rl group-hover:text-ghost transition-colors tracking-widest flex items-center gap-4">
-      Let's Explore More
-      <span className="rotate-90 md:rotate-0 mt-2 block text-slate">Scroll Down</span>
-    </span>
+    
 
     <div className="relative w-[1px] h-24 bg-navy overflow-hidden">
       <motion.div 

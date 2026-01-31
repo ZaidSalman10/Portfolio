@@ -532,7 +532,7 @@ export default function Team() {
             <h2 className="text-ghost text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 md:mb-8 relative overflow-visible">
 
             {/* Animated text wrapper */}
-            <span className="inline-flex flex-wrap justify-center whitespace-nowrap relative z-10">
+            <span className="inline-flex justify-center relative z-10">
                 {"The Minds".split("").map((char, i) => (
                 <motion.span
                     key={`minds-${i}`}
@@ -544,10 +544,10 @@ export default function Team() {
                     delay: i * 0.05,
                     ease: [0.33, 1, 0.68, 1],
                     }}
-                    className="inline-block whitespace-pre cursor-default transition-transform duration-300 hover:text-slate hover:scale-110"
+                    className="inline-block cursor-default transition-all duration-300 hover:text-slate hover:scale-110"
                     style={{ transformStyle: "preserve-3d" }}
                 >
-                    {char}
+                    {char === " " ? "\u00A0" : char}
                 </motion.span>
                 ))}
             </span>
@@ -560,6 +560,7 @@ export default function Team() {
                 aria-hidden="true"
             />
             </h2>
+
 
 
             <motion.p 
