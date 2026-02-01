@@ -72,7 +72,7 @@ const teamMembers = [
     }
   },
   {
-    name: "Ali Amjad",
+    name: "M. Ali",
     role: "UI/UX Designer & QA Tester",
     image: ali,
     bio: "User advocate translating needs into intuitive designs",

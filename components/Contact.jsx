@@ -388,7 +388,7 @@ export default function Contact() {
               © 2026 AZKKAN
             </motion.p>
             <p className="text-slate text-xs uppercase tracking-widest">
-              Crafted with Next.js & Tailwind
+              Developed By Zaid Salman
             </p>
           </motion.div>
         </div>
